@@ -2,15 +2,15 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "4.48.0"
+      version = "6.27.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.17.0"
+      version = "3.0.1"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.8.0"
+      version = "3.1.1"
     }
   }
 }
@@ -21,22 +21,18 @@ provider "aws" {
 
 provider "kubernetes" {
   host                   = module.eks_cluster.endpoint
-  cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority)
-  exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    args        = ["eks", "get-token", "--cluster-name", module.eks_cluster.cluster_name]
-    command     = "aws"
-  }
+  cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.default.token
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     host                   = module.eks_cluster.endpoint
-    cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority)
-    exec {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", module.eks_cluster.cluster_name]
-      command     = "aws"
-    }
+    cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.default.token
   }
+}
+
+data "aws_eks_cluster_auth" "default" {
+  name = "${var.project_name}-cluster"
 }

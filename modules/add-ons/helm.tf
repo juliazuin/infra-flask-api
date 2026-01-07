@@ -5,20 +5,21 @@ resource "helm_release" "eks_helm_controller" {
   version    = "1.4.7"
   namespace  = "kube-system"
 
-  set {
-    name  = "clusterName"
-    value = var.cluster_name
-  }
+  set = [
+    {
+      name  = "clusterName"
+      value = var.cluster_name
+    },
+    {
+      name  = "serviceAccount.create"
+      value = "false"
+    },
+    {
+      name  = "serviceAccount.name"
+      value = "aws-load-balancer-controller"
+    }
+  ]
 
-  set {
-    name  = "serviceAccount.create"
-    value = "false"
-  }
-
-  set {
-    name  = "serviceAccount.name"
-    value = "aws-load-balancer-controller"
-  }
 }
 
 resource "helm_release" "sealed_secrets" {
@@ -28,10 +29,12 @@ resource "helm_release" "sealed_secrets" {
   version    = "2.10.0"
   namespace  = "kube-system"
 
-  set {
-    name  = "fullnameOverride"
-    value = "sealed-secrets-controller"
-  }
+  set = [
+    {
+      name  = "fullnameOverride"
+      value = "sealed-secrets-controller"
+    }
+  ]
 }
 
 resource "helm_release" "external_dns" {
@@ -41,18 +44,18 @@ resource "helm_release" "external_dns" {
   version    = "1.13.0"
   namespace  = "kube-system"
 
-  set {
-    name  = "serviceAccount.create"
-    value = "false"
-  }
-
-  set {
-    name  = "serviceAccount.name"
-    value = "external-dns"
-  }
-
-  set {
-    name  = "policy"
-    value = "sync"
-  }
+  set = [
+    {
+      name  = "serviceAccount.create"
+      value = "false"
+    },
+    {
+      name  = "serviceAccount.name"
+      value = "external-dns"
+    },
+    {
+      name  = "policy"
+      value = "sync"
+    }
+  ]
 }

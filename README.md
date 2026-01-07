@@ -1,30 +1,34 @@
 # infra-flask-api
-# comunidadedevops-terraform
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.48.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.8.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.17.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 6.27.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 3.1.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 3.0.1 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.27.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_eks_aws_load_balancer_controller"></a> [eks\_aws\_load\_balancer\_controller](#module\_eks\_aws\_load\_balancer\_controller) | ./modules/aws-load-balancer-controller | n/a |
+| <a name="module_eks_add_ons"></a> [eks\_add\_ons](#module\_eks\_add\_ons) | ./modules/add-ons | n/a |
 | <a name="module_eks_cluster"></a> [eks\_cluster](#module\_eks\_cluster) | ./modules/cluster | n/a |
+| <a name="module_eks_ec2"></a> [eks\_ec2](#module\_eks\_ec2) | ./modules/ec2 | n/a |
 | <a name="module_eks_managed_node_group"></a> [eks\_managed\_node\_group](#module\_eks\_managed\_node\_group) | ./modules/managed-node-group | n/a |
 | <a name="module_eks_network"></a> [eks\_network](#module\_eks\_network) | ./modules/network | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_eks_cluster_auth.default](https://registry.terraform.io/providers/hashicorp/aws/6.27.0/docs/data-sources/eks_cluster_auth) | data source |
 
 ## Inputs
 
@@ -37,5 +41,10 @@ No resources.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_certificate_authority"></a> [certificate\_authority](#output\_certificate\_authority) | n/a |
+| <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | n/a |
+| <a name="output_cluster_sg"></a> [cluster\_sg](#output\_cluster\_sg) | n/a |
+| <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
 <!-- END_TF_DOCS -->
