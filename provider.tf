@@ -21,18 +21,18 @@ provider "aws" {
 
 provider "kubernetes" {
   host                   = module.eks_cluster.endpoint
-  cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority[0].data)
+  cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority)
   token                  = data.aws_eks_cluster_auth.default.token
 }
 
 provider "helm" {
   kubernetes = {
     host                   = module.eks_cluster.endpoint
-    cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority[0].data)
+    cluster_ca_certificate = base64decode(module.eks_cluster.certificate_authority)
     token                  = data.aws_eks_cluster_auth.default.token
   }
 }
 
 data "aws_eks_cluster_auth" "default" {
-  name = "${var.project_name}-cluster"
+  name = module.eks_cluster.cluster_name
 }
