@@ -33,10 +33,10 @@ resource "aws_security_group" "mongodb_sg" {
 }
 
 resource "aws_instance" "mongodb" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
 
-  key_name  = "teste" #aws_key_pair.bastion_ssh.id
+  key_name  = aws_key_pair.bastion_ssh.id
   subnet_id = var.private_subnet
   vpc_security_group_ids = [
     aws_security_group.mongodb_sg.id
