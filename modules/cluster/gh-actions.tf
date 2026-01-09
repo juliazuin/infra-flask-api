@@ -28,7 +28,15 @@ resource "aws_iam_role" "gh_actions_oidc_role" {
             "Principal": {
                 "Federated": "${aws_iam_openid_connect_provider.gh_actions_oidc.arn}"
             },
-            "Action": "sts:AssumeRoleWithWebIdentity"
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                },
+                "StringLike": {
+                    "token.actions.githubusercontent.com:sub": "repo:*:*"
+                }
+            }
         }
     ]
 }
