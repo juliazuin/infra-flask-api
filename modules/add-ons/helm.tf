@@ -4,7 +4,7 @@ resource "helm_release" "eks_helm_controller" {
   chart      = "aws-load-balancer-controller"
   version    = "1.17.0"
   namespace  = "kube-system"
-  timeout    = 1800
+  timeout    = 300
 
   set = [
     {
@@ -29,7 +29,7 @@ resource "helm_release" "sealed_secrets" {
   chart      = "sealed-secrets"
   version    = "2.18.0"
   namespace  = "kube-system"
-  timeout    = 1800
+  timeout    = 300
 
 
   set = [
@@ -46,7 +46,7 @@ resource "helm_release" "external_dns" {
   chart      = "external-dns"
   version    = "1.20.0"
   namespace  = "kube-system"
-  timeout    = 1800
+  timeout    = 300
 
 
   set = [
