@@ -1,0 +1,7 @@
+aws-load-balancer nao consegue subir 
+
+erro
+
+{"level":"error","ts":"2026-01-09T22:05:59Z","logger":"setup","msg":"unable to initialize AWS cloud","error":"failed to get VPC ID: failed to fetch VPC ID from instance metadata: error in fetching vpc id through ec2 metadata: get mac metadata: operation error ec2imds: GetMetadata, canceled, context deadline exceeded"}
+
+provavelmente tem q rever as permissoes IAM do addon
