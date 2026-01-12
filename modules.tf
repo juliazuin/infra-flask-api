@@ -28,6 +28,8 @@ module "eks_add_ons" {
   tags         = var.tags
   oidc         = module.eks_cluster.oidc
   cluster_name = module.eks_cluster.cluster_name
+
+  vpc_id = module.eks_network.vpc
 }
 
 module "eks_ec2" {
