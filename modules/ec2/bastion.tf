@@ -35,8 +35,9 @@ resource "aws_instance" "web" {
   user_data = <<EOF
 #!/bin/bash
 
-apt-get update
-apt-get install ansible -y
+yum update -y
+amazon-linux-extras install ansible2 -y
+
 EOF
 
   tags = merge(
